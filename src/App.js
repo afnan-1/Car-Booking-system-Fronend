@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Login from "./screens/Login";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import SignUp from "./screens/SignUp";
+import Home from "./screens/Home";
+import Header from "./components/Header";
+import Cars from "./screens/Cars";
+import MyBookings from "./screens/MyBookings";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <Switch>
+        <div className="mx-auto" style={{maxWidth:'1500px'}}>
+          {/* main */}
+          <Route exact  path="/" component={Home} />
+
+          {/* auth */}
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={SignUp} />
+
+          {/* cars booking */}
+          <Route path="/cars" component={Cars} />
+          <Route path="/my-bookings" component={MyBookings} />
+
+        </div>
+      </Switch>
+    </Router>
   );
 }
 
