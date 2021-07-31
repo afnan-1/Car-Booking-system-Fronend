@@ -6,6 +6,7 @@ import Home from "./screens/Home";
 import Header from "./components/Header";
 import Cars from "./screens/Cars";
 import MyBookings from "./screens/MyBookings";
+import CarsDetails from "./screens/CarsDetails";
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
           <Route path="/signup" component={SignUp} />
 
           {/* cars booking */}
-          <Route path="/cars" component={Cars} />
+          <Route exact path="/cars" component={Cars} />
+          <Route path='/cars/detail/:id' component={CarsDetails} />
           <Route path="/my-bookings" component={MyBookings} />
 
         </div>

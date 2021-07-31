@@ -1,11 +1,12 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Header() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a className="navbar-brand" href="#">
+      <NavLink className="navbar-brand" to="/">
         Car Booking
-      </a>
+      </NavLink>
       <button
         className="navbar-toggler"
         type="button"
@@ -19,21 +20,21 @@ function Header() {
       </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mx-auto">
-          <li className="nav-item active">
-            <a className="nav-link" href="#">
-              Home <span className="sr-only">(current)</span>
-            </a>
+          <li className="nav-item">
+            <NavLink className="nav-link" exact to='/'>
+              Home 
+            </NavLink>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <NavLink className="nav-link" to='/cars'>
               Cars
-            </a>
+            </NavLink>
           </li>
 
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <NavLink className="nav-link" to='/my-bookings'>
               My Bookings
-            </a>
+            </NavLink>
           </li>
           <li className="nav-item dropdown">
             <a
