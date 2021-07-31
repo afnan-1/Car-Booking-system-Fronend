@@ -1,7 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { logout } from "../store/actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
 
 function Header() {
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <NavLink className="navbar-brand" to="/">
@@ -35,6 +43,17 @@ function Header() {
             <NavLink className="nav-link" to='/my-bookings'>
               My Bookings
             </NavLink>
+          </li>
+          <li className="nav-item">
+            {userInfo ? (
+              <span onClick={handleLogout} className="nav-link">
+                Logout
+              </span>
+            ) : (
+              <NavLink exact className="nav-link" to="/login">
+                Login
+              </NavLink>
+            )}
           </li>
           <li className="nav-item dropdown">
             <a

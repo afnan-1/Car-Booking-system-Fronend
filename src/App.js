@@ -12,10 +12,10 @@ function App() {
   return (
     <Router>
       <Header />
-      <Switch>
-        <div className="mx-auto" style={{maxWidth:'1500px'}}>
+      <div className="mx-auto" style={{ maxWidth: "1500px" }}>
+        <Switch>
           {/* main */}
-          <Route exact  path="/" component={Home} />
+          <Route exact path="/" component={Home} />
 
           {/* auth */}
           <Route path="/login" component={Login} />
@@ -23,11 +23,10 @@ function App() {
 
           {/* cars booking */}
           <Route exact path="/cars" component={Cars} />
-          <Route path='/cars/detail/:id' component={CarsDetails} />
+          <Route path="/cars/detail/:id" component={CarsDetails} />
           <Route path="/my-bookings" component={MyBookings} />
-
-        </div>
-      </Switch>
+        </Switch>
+      </div>
     </Router>
   );
 }

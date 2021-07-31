@@ -1,24 +1,27 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Rating from "./Rating";
 
-function Card() {
+function Card({data}) {
   return (
-    <div className="col-md-3 col-lg-4 col-xs-12">
-      <div className="card m-2">
-        <img
-          src="https://cdn.luxe.digital/media/2020/12/16175821/most-expensive-cars-2021-Maserati-MC20-luxe-digital%402x.jpg"
-          className="card-img-top"
-          alt="..."
-        />
-        <div className="card-body">
-          <h5 className="card-title">City</h5>
-         <Rating text=" 12 Reviews" value="4" color="yellow"  />
+    <>
+      <Link to={`/cars/detail/${data.id}`} style={{textDecoration:"none",color:"inherit"}}>
+        <div className="card m-2">
+          <img
+            src={data.image}
+            className="card-img-top"
+            alt={data.name}
+          />
+          <div className="card-body">
+            <h5 className="card-title">{data.name}</h5>
+            <Rating text={`${data.numReviews} reviews`} value={data.rating} color="yellow" />
+          </div>
+          <div className="card-footer">
+            <small className="text-muted">Last updated 3 mins ago</small>
+          </div>
         </div>
-        <div className="card-footer">
-          <small className="text-muted">Last updated 3 mins ago</small>
-        </div>
-      </div>
-    </div>
+      </Link>
+    </>
   );
 }
 
