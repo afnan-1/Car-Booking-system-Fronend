@@ -1,14 +1,15 @@
 import Alert from "@material-ui/lab/Alert";
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { register } from "../store/actions/userActions";
 import { Grid, LinearProgress } from "@material-ui/core";
+import { USER_RESET } from "../store/constants/userConstants";
 export default function SignUp() {
   const history = useHistory();
   const dispatch = useDispatch();
   const userRegister = useSelector((state) => state.userRegister);
-  const { loading, error, user } = userRegister;
+  const { loading, error, success } = userRegister;
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -16,25 +17,25 @@ export default function SignUp() {
     name: "",
     email: "",
     password: "",
-    mobile_no:"",
+    mobile_no: "",
     is_driver: false,
   });
   useEffect(() => {
     if (userInfo) {
       history.push("/");
     }
-    if (user) {
+    if (success) {
+      dispatch({ type: USER_RESET });
       history.push("/login");
     }
-  }, [userInfo, user]);
+  }, [userInfo, dispatch,success]);
 
   const handleChange = (e) => {
     if (e.target.name == "is_driver") {
       if (e.target.checked) {
         setuserData({ ...userData, is_driver: true });
-      }
-      else{
-        setuserData({...userData,is_driver:false})
+      } else {
+        setuserData({ ...userData, is_driver: false });
       }
     } else {
       setuserData({ ...userData, [e.target.name]: e.target.value });
@@ -57,7 +58,11 @@ export default function SignUp() {
 
         <form className="auth-inner" onSubmit={handleSubmit}>
           <h3>Sign Up</h3>
-
+          {error && (
+            <Alert className="mt-2" severity="error">
+              {error}
+            </Alert>
+          )}
           <div className="form-group">
             <label>Name</label>
             <input

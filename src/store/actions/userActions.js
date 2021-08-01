@@ -12,7 +12,8 @@ import {
     USER_RESET_REQUEST,
     USER_REGISTER_FAIL,
     USER_REGISTER_REQUEST,
-    USER_REGISTER_SUCCESS
+    USER_REGISTER_SUCCESS,
+    USER_RESET
   } from "../constants/userConstants";
 
 
@@ -47,6 +48,7 @@ import {
   export const logout = () => (dispatch) => {
     localStorage.removeItem("userInfo");
     dispatch({ type: USER_LOGOUT });
+    dispatch({type:USER_RESET})
   };
   
 

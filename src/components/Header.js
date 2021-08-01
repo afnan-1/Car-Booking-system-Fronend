@@ -1,5 +1,5 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, useHistory } from "react-router-dom";
 import { logout } from "../store/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -7,13 +7,31 @@ function Header() {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  const [keyword, setKeyword] = useState("");
+
+  let history = useHistory();
+  useEffect(() => {
+    if (!userInfo) {
+      history.push("/login");
+    }
+  }, []);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (keyword) {
+      history.push(`/?keyword=${keyword}&page=1`);
+    } else {
+      history.push(history.push(history.location.pathname));
+    }
+  };
   const handleLogout = () => {
     dispatch(logout());
   };
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-black">
       <NavLink className="navbar-brand" to="/">
-        Car Booking
+        Car Booking Agency
       </NavLink>
       <button
         className="navbar-toggler"
@@ -29,21 +47,23 @@ function Header() {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mx-auto">
           <li className="nav-item">
-            <NavLink className="nav-link" exact to='/'>
-              Home 
+            <NavLink className="nav-link" exact to="/">
+              Home
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink className="nav-link" to='/cars'>
+            <NavLink className="nav-link" to="/cars">
               Cars
             </NavLink>
           </li>
+          {userInfo && (
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/my-bookings">
+                My Bookings
+              </NavLink>
+            </li>
+          )}
 
-          <li className="nav-item">
-            <NavLink className="nav-link" to='/my-bookings'>
-              My Bookings
-            </NavLink>
-          </li>
           <li className="nav-item">
             {userInfo ? (
               <span onClick={handleLogout} className="nav-link">
@@ -55,36 +75,14 @@ function Header() {
               </NavLink>
             )}
           </li>
-          <li className="nav-item dropdown">
-            <a
-              className="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Login
-            </a>
-            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="#">
-                Logout
-              </a>
-              <div className="dropdown-divider" />
-              <a className="dropdown-item" href="#">
-                Profile 
-              </a>
-             
-             
-            </div>
-          </li>
         </ul>
-        <form className="form-inline my-2 my-lg-0">
+        <form onSubmit={submitHandler} className="form-inline my-2 my-lg-0">
           <input
             className="form-control mr-sm-2"
             type="search"
             placeholder="Search"
+            name="q"
+            onChange={(e) => setKeyword(e.target.value)}
             aria-label="Search"
           />
           <button

@@ -17,7 +17,7 @@ function Card({data}) {
             <Rating text={`${data.numReviews} reviews`} value={data.rating} color="yellow" />
           </div>
           <div className="card-footer">
-            <small className="text-muted">Last updated 3 mins ago</small>
+            <small className="text-muted">Recently Updated</small>
           </div>
         </div>
       </Link>

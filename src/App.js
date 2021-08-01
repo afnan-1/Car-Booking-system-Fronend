@@ -15,16 +15,16 @@ function App() {
       <div className="mx-auto" style={{ maxWidth: "1500px" }}>
         <Switch>
           {/* main */}
-          <Route exact path="/" component={Home} />
 
           {/* auth */}
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={SignUp} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={SignUp} />
 
           {/* cars booking */}
           <Route exact path="/cars" component={Cars} />
           <Route path="/cars/detail/:id" component={CarsDetails} />
           <Route path="/my-bookings" component={MyBookings} />
+          <Route path="/" component={Home} />
         </Switch>
       </div>
     </Router>

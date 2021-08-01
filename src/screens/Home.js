@@ -6,19 +6,20 @@ import { useDispatch } from "react-redux";
 import Card from "../components/Card";
 import Carousel from "../components/Carousel";
 import { listProducts } from "../store/actions/carActions";
-function Home() {
+function Home({ history }) {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
   const { error, loading, products, page, pages } = productList;
+  let keyword = history.location.search
+
   useEffect(() => {
-    dispatch(listProducts());
-  }, [dispatch]);
+    dispatch(listProducts(keyword));
+  }, [dispatch,keyword]);
   return (
     <div>
-      <Carousel />
-      {loading ? (
-        <LinearProgress />
-      ) : error ? (
+    {!keyword&&  <Carousel />}
+    {loading&&<LinearProgress />}
+      { error ? (
         <Alert severity="error">{error}</Alert>
       ) : (
         <>
@@ -36,7 +37,7 @@ function Home() {
           <div className="container">
             <div className="row">
               {products &&
-                products.map((v, i) => {
+                products.slice(0,10).map((v, i) => {
                   return (
                     <div className="col-md-3 col-lg-4 col-xs-12" key={i}>
                       <Card data={v} />

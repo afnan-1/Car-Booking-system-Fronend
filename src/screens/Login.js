@@ -72,7 +72,7 @@ export default function Login() {
             Submit
           </button>
           <p className="forgot-password text-right">
-           No Login?/ <Link to='/signup'>Sign up?</Link>
+            No Login?/ <Link to="/signup">Sign up?</Link>
           </p>{" "}
           {error && (
             <Alert className="mt-2" severity="error">

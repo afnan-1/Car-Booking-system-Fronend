@@ -29,6 +29,10 @@ import {
     PRODUCT_TOP_SUCCESS,
     PRODUCT_TOP_FAIL,
 
+
+    CAR_AVAILABLE_FAIL_REQUEST,
+    CAR_AVAILABLE_LIST_REQUEST,
+    CAR_AVAILABLE_SUCCESS_REQUEST
 } from '../constants/carConstants'
 
 
@@ -37,7 +41,7 @@ export const listProducts = (keyword = '') => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_LIST_REQUEST })
 
-        const { data } = await axios.get(`/api/list-cars`)
+        const { data } = await axios.get(`/api/list-cars${keyword}`)
 
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
@@ -47,6 +51,27 @@ export const listProducts = (keyword = '') => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: PRODUCT_LIST_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+export const listAvailableCars = (keyword = '') => async (dispatch) => {
+    try {
+        dispatch({ type: CAR_AVAILABLE_LIST_REQUEST })
+
+        const { data } = await axios.get(`/api/available-cars`)
+
+        dispatch({
+            type: CAR_AVAILABLE_SUCCESS_REQUEST,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: CAR_AVAILABLE_FAIL_REQUEST,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,
@@ -70,6 +95,48 @@ export const listCarDetails = (id) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: PRODUCT_DETAILS_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+
+
+
+export const createProductReview = (productId, review) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: PRODUCT_CREATE_REVIEW_REQUEST
+        })
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        const config = {
+            headers: {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${userInfo.access}`
+            }
+        }
+
+        const { data } = await axios.post(
+            `/api/car/reviews/add/${productId}/`,
+            review,
+            config
+        )
+        dispatch({
+            type: PRODUCT_CREATE_REVIEW_SUCCESS,
+            payload: data,
+        })
+
+
+
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_CREATE_REVIEW_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,

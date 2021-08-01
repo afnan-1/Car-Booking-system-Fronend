@@ -19,28 +19,28 @@ function Carousel() {
       <div className="carousel-inner">
         <div className="carousel-item active">
           <img
-            src="https://thumbor.forbes.com/thumbor/fit-in/1200x0/filters%3Aformat%28jpg%29/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5d35eacaf1176b0008974b54%2F0x0.jpg%3FcropX1%3D790%26cropX2%3D5350%26cropY1%3D784%26cropY2%3D3349"
+            src="https://www.bsahab.com/blog/wp-content/uploads/2018/10/rent-a-car-for-lahore.jpg"
             className="d-block w-100"
             alt="..."
-            style={{objectFit:'cover'}}
+            style={{ objectFit: "cover" }}
             height="500"
           />
         </div>
         <div className="carousel-item">
           <img
-            src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8MjAyMCUyMGNhcnN8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"
+            src="https://ddi-dev.com/uploads/booking-software.jpg"
             className="d-block w-100"
             alt="..."
-            style={{objectFit:'cover'}}
+            style={{ objectFit: "cover" }}
             height="500"
           />
         </div>
         <div className="carousel-item">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZMzaPNS0QqgovY3-6YnWZG3kVasDww8obzw&usqp=CAU"
+            src="https://i.pinimg.com/originals/b2/5c/37/b25c3740dfbb1ddc4da25ac316683065.jpg"
             className="d-block w-100"
             alt="..."
-            style={{objectFit:'cover'}}
+            style={{ objectFit: "cover" }}
             height="500"
           />
         </div>
