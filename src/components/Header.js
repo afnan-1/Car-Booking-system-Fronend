@@ -12,9 +12,7 @@ function Header() {
 
   let history = useHistory();
   useEffect(() => {
-    if (!userInfo) {
-      history.push("/login");
-    }
+   
   }, []);
 
   const submitHandler = (e) => {

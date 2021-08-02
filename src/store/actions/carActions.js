@@ -37,7 +37,7 @@ import {
 
 
 
-export const listProducts = (keyword = '') => async (dispatch) => {
+export const listCars = (keyword = '') => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_LIST_REQUEST })
 

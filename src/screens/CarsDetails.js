@@ -17,6 +17,8 @@ function CarsDetails({ match }) {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
   const productReviewCreate = useSelector((state) => state.productReviewCreate);
 
   const bookingAdd = useSelector((state) => state.bookingAdd);
@@ -65,7 +67,7 @@ function CarsDetails({ match }) {
                 />
               </div>
 
-              <div className="col-md-6">
+              <div className="col-md-4">
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item">
                     <h3>{product.name}</h3>
@@ -90,6 +92,21 @@ function CarsDetails({ match }) {
                       Book Car
                     </button>
                   </li>
+                </ul>
+              </div>
+              <div className="col-md-2">
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item">
+                    <h5>{product.car_driver}</h5>
+                  </li>
+                  {product && product.car_driver_image && (
+                    <li className="list-group-item">
+                      <img
+                        className="img-fluid"
+                        src={product.car_driver_image}
+                      />
+                    </li>
+                  )}
                 </ul>
               </div>
             </div>
@@ -136,41 +153,47 @@ function CarsDetails({ match }) {
                   {errorProductReview && (
                     <Alert variant="danger">{errorProductReview}</Alert>
                   )} */}
-                    <form onSubmit={submitHandler}>
-                      <div className="form-group">
-                        <label htmlFor="">Rating</label>
-                        <select
-                          class="custom-select"
-                          value={rating}
-                          onChange={(e) => setRating(e.target.value)}
-                        >
-                          <option value="">Select...</option>
-                          <option selected value="1">
-                            1
-                          </option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
+                    {userInfo ? (
+                      <form onSubmit={submitHandler}>
+                        <div className="form-group">
+                          <label htmlFor="">Rating</label>
+                          <select
+                            class="custom-select"
+                            value={rating}
+                            onChange={(e) => setRating(e.target.value)}
+                          >
+                            <option value="">Select...</option>
+                            <option selected value="1">
+                              1
+                            </option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
 
-                          <option value="3">4</option>
-                          <option value="3">5</option>
-                        </select>
-                      </div>
+                            <option value="3">4</option>
+                            <option value="3">5</option>
+                          </select>
+                        </div>
 
-                      <div className="form-group">
-                        <label htmlFor="">Review</label>
-                        <textarea
-                          name=""
-                          rows="6"
-                          value={comment}
-                          onChange={(e) => setComment(e.target.value)}
-                          className="form-control"
-                        ></textarea>
-                      </div>
+                        <div className="form-group">
+                          <label htmlFor="">Review</label>
+                          <textarea
+                            name=""
+                            rows="6"
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                            className="form-control"
+                          ></textarea>
+                        </div>
 
-                      <button className="btn bg-black text-light ">
-                        submit
-                      </button>
-                    </form>
+                        <button className="btn bg-black text-light ">
+                          submit
+                        </button>
+                      </form>
+                    ) : (
+                      <Alert severity="info">
+                        Please <Link to="/login">login</Link> to write a review
+                      </Alert>
+                    )}
                   </li>
                 </ul>
               </div>

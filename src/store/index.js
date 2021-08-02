@@ -6,14 +6,14 @@ import {
   userLoginReducer,
   userRegisterReducer,
 } from "./reducers/userReducers";
-import { carAvailableListReducer, productListReducer, productReviewCreateReducer } from "./reducers/carReducers";
+import { carAvailableListReducer, carListReducer, productReviewCreateReducer } from "./reducers/carReducers";
 import { bookingAddReducer, bookingListReducer } from "./reducers/bookingReducers";
 
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
-  productList: productListReducer,
+  carList: carListReducer,
   productDetails: carDetailsReducer,
   productReviewCreate: productReviewCreateReducer,
 

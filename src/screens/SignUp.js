@@ -55,7 +55,7 @@ export default function SignUp() {
         {userInfo && (
           <Alert severity={"success"}>Registered successfully.</Alert>
         )}
-
+      
         <form className="auth-inner" onSubmit={handleSubmit}>
           <h3>Sign Up</h3>
           {error && (
