@@ -51,7 +51,7 @@ function Header() {
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/cars">
-              Cars
+              Book a Car
             </NavLink>
           </li>
           {userInfo && (

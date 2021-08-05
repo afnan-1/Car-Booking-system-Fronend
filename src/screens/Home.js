@@ -38,7 +38,7 @@ function Home({ history }) {
             
           {products && products.length === 0 && (
             <div className="py-2">
-                <Alert severity="warning">There is no product !</Alert>
+                <Alert severity="warning">There is no Car Available or booking !</Alert>
                 </div>
               )}
             <div className="row">
